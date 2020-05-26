@@ -7,9 +7,13 @@ int main(){
         int idade;
     }Contato;
 
+    int opcao, i;
     Contato agenda[5];
 
-    int opcao;
+    // Inicialização da agenda
+    for(i=0; i<5; i++){
+        agenda[i].idade = -1;
+    }
 
     do{
         printf("=======AGENDA=======\n");
@@ -21,26 +25,60 @@ int main(){
         printf("0 - Sair\n");
         printf("OPCAO: ");
         scanf("%i", &opcao);
+        setbuf(stdin, NULL);
 
         switch(opcao){
             case 1:
-                printf("CADASTAR\n");
+                system("cls");
+                printf("======CADASTRAR=====\n");                
+                for(i=0; i<5; i++){
+                    if(agenda[i].idade == -1){
+                        break;
+                    }
+                }
+
+                printf("Nome: ");
+                fgets(agenda[i].nome, 31, stdin);
+                setbuf(stdin, NULL);
+
+                printf("Sobrenome: ");
+                fgets(agenda[i].sobrenome, 51, stdin);
+                setbuf(stdin, NULL);
+
+                printf("Idade: ");
+                scanf("%i", &agenda[i].idade);
+                setbuf(stdin, NULL);
+
+                printf("Telefone: ");
+                fgets(agenda[i].telefone, 16, stdin);
+                setbuf(stdin, NULL);
+
+                printf("Endereco: ");
+                fgets(agenda[i].endereco, 101, stdin);
+                setbuf(stdin, NULL);
+
                 break;
+
             case 2:
                 printf("LOCALIZAR\n");
                 break;
+
             case 3:
                 printf("LISTAR TODOS\n");
                 break;
+
             case 4:
                 printf("ALTERAR\n");
                 break;
+
             case 5:
                 printf("EXCLUIR\n");
                 break;
+
             case 0:
                 printf("Obrigado por usar nosso programa!\n");
                 break;
+                
             default:
                 printf("Opcao invalida!\n");
 
@@ -48,6 +86,14 @@ int main(){
         system("pause");
         system("cls");
     }while(opcao!=0);
+
+    for(i=0; i<5; i++){        
+        printf("Nome: %s", agenda[i].nome);
+        printf("Sobrenome: %s", agenda[i].sobrenome);
+        printf("Idade: %i\n", agenda[i].idade);
+        printf("Telefone: %s", agenda[i].telefone);
+        printf("Endereco: %s", agenda[i].endereco);
+    }
 
     return 0;
 }
