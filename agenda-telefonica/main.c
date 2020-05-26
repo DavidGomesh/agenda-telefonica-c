@@ -1,6 +1,14 @@
 #include <stdio.h>
 
 int main(){
+
+    typedef struct tipo_contato{
+        char nome[31], sobrenome[51], telefone[16], endereco[101];
+        int idade;
+    }Contato;
+
+    Contato agenda[5];
+
     int opcao;
 
     do{
