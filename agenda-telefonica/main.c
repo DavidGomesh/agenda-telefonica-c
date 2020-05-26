@@ -87,13 +87,5 @@ int main(){
         system("cls");
     }while(opcao!=0);
 
-    for(i=0; i<5; i++){        
-        printf("Nome: %s", agenda[i].nome);
-        printf("Sobrenome: %s", agenda[i].sobrenome);
-        printf("Idade: %i\n", agenda[i].idade);
-        printf("Telefone: %s", agenda[i].telefone);
-        printf("Endereco: %s", agenda[i].endereco);
-    }
-
     return 0;
 }
