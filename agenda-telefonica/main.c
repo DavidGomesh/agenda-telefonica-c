@@ -35,7 +35,6 @@ int main(){
                 printf("======CADASTRAR=====\n");                
                 for(i=0; i<5; i++){
                     if(strcmp(agenda[i].nome, "")==0){ //strcmp(string1, string2) compara a string1 com a string 2
-                        printf("Posicao vazia: %i\n", i);
                         break;
                     }
                 }
