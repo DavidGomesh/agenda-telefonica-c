@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(){
 
@@ -13,7 +14,7 @@ int main(){
 
     // Inicialização da agenda
     for(i=0; i<5; i++){
-        agenda[i].idade = -1;
+        strcpy(agenda[i].nome, ""); //strcpy(destino, origem): vai copiar uma string na outra 
     }
 
     do{
@@ -33,7 +34,8 @@ int main(){
                 system("cls");
                 printf("======CADASTRAR=====\n");                
                 for(i=0; i<5; i++){
-                    if(agenda[i].idade == -1){
+                    if(strcmp(agenda[i].nome, "")==0){ //strcmp(string1, string2) compara a string1 com a string 2
+                        printf("Posicao vazia: %i\n", i);
                         break;
                     }
                 }
