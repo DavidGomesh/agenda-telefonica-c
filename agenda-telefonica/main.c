@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(){
 
@@ -39,11 +40,9 @@ int main(){
 
                 printf("Nome: ");
                 fgets(agenda[i].nome, 31, stdin);
-                setbuf(stdin, NULL);
 
                 printf("Sobrenome: ");
                 fgets(agenda[i].sobrenome, 51, stdin);
-                setbuf(stdin, NULL);
 
                 printf("Idade: ");
                 scanf("%i", &agenda[i].idade);
@@ -51,11 +50,9 @@ int main(){
 
                 printf("Telefone: ");
                 fgets(agenda[i].telefone, 16, stdin);
-                setbuf(stdin, NULL);
 
                 printf("Endereco: ");
                 fgets(agenda[i].endereco, 101, stdin);
-                setbuf(stdin, NULL);
 
                 break;
 
