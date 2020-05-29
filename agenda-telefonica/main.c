@@ -9,7 +9,7 @@ int main(){
         int idade;
     }Contato;
 
-    int opcao, i, opcao_alterar;
+    int opcao, i, opcao_alterar, opcao_excluir;
     Contato agenda[5];
 
     char nome[31];
@@ -169,7 +169,43 @@ int main(){
                 break;
 
             case 5:
-                printf("EXCLUIR\n");
+                system("cls");
+                printf("======EXCLUIR=====\n");
+                printf("Informe um nome: ");
+                fgets(nome, 31, stdin);
+
+                for(i=0; i<5; i++){
+                    if(strcmp(agenda[i].nome, nome)==0){
+                        printf("\nNome: %s", agenda[i].nome);
+                        printf("Sobrenome: %s", agenda[i].sobrenome);
+                        printf("Idade: %i\n", agenda[i].idade);
+                        printf("Telefone: %s", agenda[i].telefone);
+                        printf("Endereco: %s", agenda[i].endereco);
+
+                        printf("\nVoce deseja excluir esse contato?\n");
+                        printf("1 - SIM\t\t2 - NAO\n");
+                        printf("OPCAO: ");
+                        scanf("%i", &opcao_excluir);
+
+                        switch (opcao_excluir){
+                            case 1:
+                                strcpy(agenda[i].nome, "");
+                                strcpy(agenda[i].sobrenome, "");
+                                agenda[i].idade = -1;
+                                strcpy(agenda[i].telefone, "");
+                                strcpy(agenda[i].endereco, "");
+                                printf("Excluido com sucesso!\n");
+                                break;
+
+                            case 2:
+                                break;
+                            
+                            default:
+                                printf("Opcao invalida!\n");
+                                break;
+                        }
+                    }
+                }
                 break;
 
             case 0:
