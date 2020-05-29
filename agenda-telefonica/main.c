@@ -9,7 +9,7 @@ int main(){
         int idade;
     }Contato;
 
-    int opcao, i;
+    int opcao, i, opcao_alterar;
     Contato agenda[5];
 
     char nome[31];
@@ -61,7 +61,7 @@ int main(){
 
             case 2:
                 system("cls");
-                printf("======LOCALIZAR=====\n\n");
+                printf("======LOCALIZAR=====\n");
                 printf("Informe o nome: ");
                 fgets(nome, 31, stdin);
 
@@ -96,7 +96,76 @@ int main(){
                 break;
 
             case 4:
-                printf("ALTERAR\n");
+                system("cls");
+                printf("======ALTERAR=====\n");
+                printf("Informe um nome: ");
+                fgets(nome, 31, stdin);
+
+                for(i=0; i<5; i++){
+                    if(strcmp(agenda[i].nome, nome)==0){
+                        do{
+                            system("cls");
+                            printf("======ALTERAR=====\n");
+
+                            printf("Nome: %s", agenda[i].nome);
+                            printf("Sobrenome: %s", agenda[i].sobrenome);
+                            printf("Idade: %i\n", agenda[i].idade);
+                            printf("Telefone: %s", agenda[i].telefone);
+                            printf("Endereco: %s", agenda[i].endereco);
+
+                            printf("\nO que voce deseja alterar?\n");
+                            printf("1 - Nome\n");
+                            printf("2 - Sobrenome\n");
+                            printf("3 - Idade\n");
+                            printf("4 - Telefone\n");
+                            printf("5 - Endereco\n");
+                            printf("0 - Voltar\n");
+                            printf("OPCAO: ");
+                            scanf("%i", &opcao_alterar);
+                            setbuf(stdin, NULL);
+
+                            switch (opcao_alterar){
+                                case 1:
+                                    printf("Novo Nome: ");
+                                    fgets(agenda[i].nome, 31, stdin);
+                                    printf("Alterado com sucesso!\n");
+                                    break;
+
+                                case 2:
+                                    printf("Novo Sobrenome: ");
+                                    fgets(agenda[i].sobrenome, 51, stdin);
+                                    printf("Alterado com sucesso!\n");
+                                    break;
+
+                                case 3:
+                                    printf("Nova Idade: ");
+                                    scanf("%i", &agenda[i].idade);
+                                    printf("Alterado com sucesso!\n");
+                                    break;
+
+                                case 4:
+                                    printf("Novo Telefone: ");
+                                    fgets(agenda[i].telefone, 16, stdin);
+                                    printf("Alterado com sucesso!\n");
+                                    break;
+
+                                case 5:
+                                    printf("Novo Endereco: ");
+                                    fgets(agenda[i].endereco, 101, stdin);
+                                    printf("Alterado com sucesso!\n");
+                                    break;
+
+                                case 0:
+                                    break;
+
+                                default:
+                                    printf("Opcao invalida!\n");
+                            }
+
+                        }while(opcao_alterar!=0);
+                    }
+                }
+
                 break;
 
             case 5:
