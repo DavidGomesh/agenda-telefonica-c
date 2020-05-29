@@ -12,6 +12,8 @@ int main(){
     int opcao, i;
     Contato agenda[5];
 
+    char nome[31];
+
     // Inicialização da agenda
     for(i=0; i<5; i++){
         strcpy(agenda[i].nome, ""); //strcpy(destino, origem): vai copiar uma string na outra 
@@ -58,11 +60,39 @@ int main(){
                 break;
 
             case 2:
-                printf("LOCALIZAR\n");
+                system("cls");
+                printf("======LOCALIZAR=====\n\n");
+                printf("Informe o nome: ");
+                fgets(nome, 31, stdin);
+
+                for(i=0; i<5; i++){
+                    if(strcmp(nome, agenda[i].nome)==0){
+                        printf("======CONTATO=====\n");
+                        printf("Nome: %s", agenda[i].nome);
+                        printf("Sobrenome: %s", agenda[i].sobrenome);
+                        printf("Idade: %i\n", agenda[i].idade);
+                        printf("Telefone: %s", agenda[i].telefone);
+                        printf("Endereco: %s", agenda[i].endereco);
+                        printf("==================\n\n");
+                    }
+                }
                 break;
 
             case 3:
-                printf("LISTAR TODOS\n");
+                system("cls");
+                printf("======LISTAR TODOS=====\n\n");
+
+                for(i=0; i<5; i++){
+                    if(strcmp(agenda[i].nome, "")!=0){
+                        printf("=========CONTATO=======\n");
+                        printf("Nome: %s", agenda[i].nome);
+                        printf("Sobrenome: %s", agenda[i].sobrenome);
+                        printf("Idade: %i\n", agenda[i].idade);
+                        printf("Telefone: %s", agenda[i].telefone);
+                        printf("Endereco: %s", agenda[i].endereco);
+                        printf("=======================\n\n");
+                    }
+                }
                 break;
 
             case 4:
