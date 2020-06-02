@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define _MAX 7
+
 typedef struct tipo_contato{
     char nome[31], sobrenome[51], telefone[16], endereco[101];
     int idade;
@@ -15,9 +17,9 @@ typedef struct tipo_contato{
 // - (ok) Mover listar todos para uma função
 // - (ok) Mover alterar para uma função
 // - (ok) Mover excluir para uma função
-// - Facilitar alteração do tamanho da agenda
-// - Criar uma função especialista em localizar contatos
-// - Criar uma função especialista em exibir contatos
+// - (ok) Facilitar alteração do tamanho da agenda
+// - (ok) Criar uma função especialista em localizar contatos
+// - (ok) Criar uma função especialista em exibir contatos
 // - Criar uma função especialista em alterar contatos
 // - Criar uma função especialista em remover contatos
 // - Adicionar funcionalidade de ligar para algum contato e guardar no histórico
@@ -30,9 +32,12 @@ void listarTodosContatos(Contato *agenda);
 void alterarContato(Contato *agenda);
 void excluirContato(Contato *agenda);
 
+int localizarContatoAtual(Contato agenda[], char nome[]);
+void exibirContatoAtual(Contato contato);
+
 int main(){
     int opcao;
-    Contato agenda[5];
+    Contato agenda[_MAX];
     // Inicialização da agenda
     inicializarAgenda(agenda);
 
@@ -91,7 +96,7 @@ int mostrarMenuPrincipal(){
 }
 
 void inicializarAgenda(Contato *agenda){
-    for(int i=0; i<5; i++){
+    for(int i=0; i<_MAX; i++){
         strcpy(agenda[i].nome, ""); //strcpy(destino, origem): vai copiar uma string na outra 
         strcpy(agenda[i].sobrenome, "");
         agenda[i].idade = -1;
@@ -104,7 +109,7 @@ void cadastrarContato(Contato *agenda){
     int i;
     system("cls");
     printf("======CADASTRAR=====\n");                
-    for(i=0; i<5; i++){
+    for(i=0; i<_MAX; i++){
         if(strcmp(agenda[i].nome, "")==0){ //strcmp(string1, string2) compara a string1 com a string 2
             break;
         }
@@ -137,11 +142,7 @@ void localizarContato(Contato *agenda){
     for(int i=0; i<5; i++){
         if(strcmp(nome, agenda[i].nome)==0){
             printf("======CONTATO=====\n");
-            printf("Nome: %s", agenda[i].nome);
-            printf("Sobrenome: %s", agenda[i].sobrenome);
-            printf("Idade: %i\n", agenda[i].idade);
-            printf("Telefone: %s", agenda[i].telefone);
-            printf("Endereco: %s", agenda[i].endereco);
+            exibirContatoAtual(agenda[i]);
             printf("==================\n\n");
         }
     }
@@ -151,14 +152,10 @@ void listarTodosContatos(Contato *agenda){
     system("cls");
     printf("======LISTAR TODOS=====\n\n");
 
-    for(int i=0; i<5; i++){
+    for(int i=0; i<_MAX; i++){
         if(strcmp(agenda[i].nome, "")!=0){
             printf("=========CONTATO=======\n");
-            printf("Nome: %s", agenda[i].nome);
-            printf("Sobrenome: %s", agenda[i].sobrenome);
-            printf("Idade: %i\n", agenda[i].idade);
-            printf("Telefone: %s", agenda[i].telefone);
-            printf("Endereco: %s", agenda[i].endereco);
+            exibirContatoAtual(agenda[i]);
             printf("=======================\n\n");
         }
     }
@@ -172,17 +169,13 @@ void alterarContato(Contato *agenda){
     printf("Informe um nome: ");
     fgets(nome, 31, stdin);
 
-    for(int i=0; i<5; i++){
+    for(int i=0; i<_MAX; i++){
         if(strcmp(agenda[i].nome, nome)==0){
             do{
                 system("cls");
                 printf("======ALTERAR=====\n");
 
-                printf("Nome: %s", agenda[i].nome);
-                printf("Sobrenome: %s", agenda[i].sobrenome);
-                printf("Idade: %i\n", agenda[i].idade);
-                printf("Telefone: %s", agenda[i].telefone);
-                printf("Endereco: %s", agenda[i].endereco);
+                exibirContatoAtual(agenda[i]);
 
                 printf("\nO que voce deseja alterar?\n");
                 printf("1 - Nome\n");
@@ -246,36 +239,50 @@ void excluirContato(Contato *agenda){
     printf("Informe um nome: ");
     fgets(nome, 31, stdin);
 
-    for(int i=0; i<5; i++){
+    int i = localizarContatoAtual(agenda, nome);
+    if(i==-1){
+        printf("Contato nao encontrado!\n\n");
+        return;
+    }
+    exibirContatoAtual(agenda[i]);
+    printf("\nVoce deseja excluir esse contato?\n");
+    printf("1 - SIM\t\t2 - NAO\n");
+    printf("OPCAO: ");
+    scanf("%i", &opcao);
+
+    switch (opcao){
+        case 1:
+            strcpy(agenda[i].nome, "");
+            strcpy(agenda[i].sobrenome, "");
+            agenda[i].idade = -1;
+            strcpy(agenda[i].telefone, "");
+            strcpy(agenda[i].endereco, "");
+            printf("Excluido com sucesso!\n");
+            break;
+
+        case 2:
+            break;
+        
+        default:
+            printf("Opcao invalida!\n");
+            break;
+    }
+}
+
+int localizarContatoAtual(Contato agenda[], char nome[]){
+    for(int i=0; i<_MAX; i++){
         if(strcmp(agenda[i].nome, nome)==0){
-            printf("\nNome: %s", agenda[i].nome);
-            printf("Sobrenome: %s", agenda[i].sobrenome);
-            printf("Idade: %i\n", agenda[i].idade);
-            printf("Telefone: %s", agenda[i].telefone);
-            printf("Endereco: %s", agenda[i].endereco);
-
-            printf("\nVoce deseja excluir esse contato?\n");
-            printf("1 - SIM\t\t2 - NAO\n");
-            printf("OPCAO: ");
-            scanf("%i", &opcao);
-
-            switch (opcao){
-                case 1:
-                    strcpy(agenda[i].nome, "");
-                    strcpy(agenda[i].sobrenome, "");
-                    agenda[i].idade = -1;
-                    strcpy(agenda[i].telefone, "");
-                    strcpy(agenda[i].endereco, "");
-                    printf("Excluido com sucesso!\n");
-                    break;
-
-                case 2:
-                    break;
-                
-                default:
-                    printf("Opcao invalida!\n");
-                    break;
-            }
+            return i;
         }
     }
+    
+    return -1;
+}
+
+void exibirContatoAtual(Contato contato){
+    printf("Nome: %s", contato.nome);
+    printf("Sobrenome: %s", contato.sobrenome);
+    printf("Idade: %i\n", contato.idade);
+    printf("Telefone: %s", contato.telefone);
+    printf("Endereco: %s", contato.endereco);
 }
